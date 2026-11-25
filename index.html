@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mini BMS - Sala 1</title>
+<style>
+body{font-family:Arial;background:#0f172a;color:white;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
+.card{background:#1e293b;padding:40px;border-radius:20px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.temp{font-size:80px;font-weight:bold;color:#38bdf8}
+.status{color:#4ade80}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>🏢 Mini BMS - Sala 1</h1>
+<div class="temp"><span id="temp">--</span>°C</div>
+<p>Última atualização: <span id="hora">--</span></p>
+<p class="status">● AO VIVO</p>
+</div>
+<script>
+async function atualizar(){
+  const r = await fetch('/api/temperatura');
+  const d = await r.json();
+  document.getElementById('temp').innerText = d.temperatura;
+  document.getElementById('hora').innerText = d.hora;
+}
+setInterval(atualizar, 2000);
+atualizar();
+</script>
+</body>
+</html>
